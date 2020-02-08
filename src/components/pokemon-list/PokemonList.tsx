@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
+import { Avatar, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import * as _ from "lodash";
 
 import { QueryParams } from "../../services/http/HttpService";
 import { PokemonState, State } from "../../redux/state/State";
 import { getPokemonList } from "../../redux/actions/PokemonActions";
-import PokemonCard from "./pokemon-card/PokemonCard";
 
 import "./PokemonList.scss";
 
@@ -37,16 +37,35 @@ class PokemonList extends Component<PokemonListProps, PokemonListState> {
 
         return (
             <div className="pokemon-list">
-                <ul>
-                    { _.map(pokemonList, (pokemon, i) => {
-                        return (
-                            <PokemonCard
-                                pokemon={ pokemon }
-                                key={ i }
-                            />
-                        );
-                    }) }
-                </ul>
+                <TableContainer component={ Paper }>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell style={ { width: '10%' } }>#</TableCell>
+                                <TableCell style={ { width: '10%' } }>Name</TableCell>
+                                <TableCell style={ { width: '10%' } } />
+                                <TableCell style={ { width: '70%' } } />
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            { _.map(pokemonList, (pokemon, i) => {
+                                return (
+                                    <TableRow key={ i }>
+                                        <TableCell style={ { width: '10%' } }>{ i + 1 }</TableCell>
+                                        <TableCell style={ { width: '10%' } }>{ _.capitalize(pokemon.name) }</TableCell>
+                                        <TableCell style={ { width: '10%' } }>
+                                            <Avatar
+                                                variant="square"
+                                                src={ `http://www.pokestadium.com/sprites/xy/${ pokemon.name }.gif` }
+                                            />
+                                        </TableCell>
+                                        <TableCell style={ { width: '70%' } } />
+                                    </TableRow>
+                                );
+                            }) }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
         );
     }

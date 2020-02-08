@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import PokemonList from "./components/pokemon-list/PokemonList";
+import AppLayout from "./components/app-layout/AppLayout";
 
 
 interface AppProps {
@@ -13,12 +13,12 @@ interface AppState {
 
 class App extends Component<AppProps, AppState> {
 
-  render() {
+    render() {
 
-    return (
-        <PokemonList/>
-    );
-  }
+        return (
+            <AppLayout />
+        );
+    }
 
 }
 
